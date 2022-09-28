@@ -25,7 +25,7 @@ std::set<std::string> Book::keywords()
 
 std::string Book::displayString()
 {
-    //Title | $x.xx | In Stock: x | Book
+    //The Kinda Alright Gatsby by Dresden Kershaw | $4.19 | In Stock: 1 | Book
     std::string out = "";
     out += this->name_;
     out += " by ";
