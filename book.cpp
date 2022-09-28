@@ -1,24 +1,35 @@
 #include "book.h"
+#include "util.h"
 
-void Book::dump(std::ostream& os)
+Book::Book(const std::string category, const std::string name, double price, int qty, const std::string isbn, const std::string author) : Product::Product("book", name, price, qty)
 {
-    ;
+    this->isbn_ = isbn;
+    this->author_ = author;
+}
+
+void Book::dump(std::ostream& os) const
+{
+    //write data from class into raw text stream
+    Product::dump(os);
+    os << this->isbn_ <<  "\n" << this->author_ << std::endl;
 }
 
 std::set<std::string> Book::keywords()
 {
-    std::set<std::string>* s = new std::set<std::string>;
-    s->insert(this->name_);
-    s->insert(std::to_string(this->price_));
-    s->insert(std::to_string(this->qty_));
-    s->insert(this->category_);
-    return * s;
+    std::set<std::string> s_1 = parseStringToWords(this->name_);
+    std::set<std::string> s_2 = parseStringToWords(this->author_);
+    s_1.insert(this->isbn_);
+    std::set<std::string> s_3 = setUnion<std::string>(s_1, s_2);
+    return s_3;
 }
 
 std::string Book::displayString()
 {
+    //Title | $x.xx | In Stock: x | Book
     std::string out = "";
     out += this->name_;
+    out += " by ";
+    out += this->author_;
     out += "| $";
     out += this->price_;
     out += " | In Stock: ";
