@@ -36,3 +36,14 @@ void User::dump(std::ostream& os)
 {
     os << name_ << " "  << balance_ << " " << type_ << endl;
 }
+
+//My Code
+void User::checkout()
+{
+    for(int i = this->cart.getSize() - 1; i >= 0; i--)
+    {
+        //CASE 0: Item is out of stock
+        //CASE 1: Cannot afford item
+        //CASE 2: Purchase successful
+    }
+}

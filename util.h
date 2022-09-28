@@ -25,13 +25,13 @@ std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
     // iterating through all members of one set will take O(n)
     // together, these will run in O(n*logn)
 
-    std::set<T>* intersectionSet = new std::set<T>;
+    typename std::set<T>* intersectionSet = new std::set<T>;
 
     //this outer loop runs O(s1->size())
-    for (std::set<int>::iterator it = s1->begin(); it != s1->end(); it++)
+    for (typename std::set<T>::iterator it = s1.begin(); it != s1.end(); it++)
     {
         //this inner loop runs in O(log(s2.->size()))
-        if(s2->find(*it))
+        if(s2.find(*it) != s2.end())
         {
             //runs in O(1) since sorted. see https://cplusplus.com/reference/set/set/insert/
             intersectionSet->insert(*it);
@@ -52,16 +52,16 @@ std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
     // or O(2n)
     // or O(n)
 
-    std::set<T>* unionSet = new std::set<T>;
+    typename std::set<T>* unionSet = new std::set<T>;
 
     //this loop runs O(s1->size()), or O(n)
-    for(std::set<int>::iterator it = s1->begin(); it != s1->end(); it++)
+    for(typename std::set<T>::iterator it = s1.begin(); it != s1.end(); it++)
     {
         unionSet->insert(*it);
     }
 
     //this loop runs O(s2->size()), or O(n)
-    for(std::set<int>::iterator it = s2->begin(); it != s2->end(); it++)
+    for(typename std::set<T>::iterator it = s2.begin(); it != s2.end(); it++)
     {
         unionSet->insert(*it);
     }
