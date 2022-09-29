@@ -130,8 +130,8 @@ std::string ProductBookParser::categoryID()
  */
 Product* ProductBookParser::makeProduct()
 {
-
-
+    Book* out = new Book("book", prodName_, price_, qty_, isbn_, author_);
+    return out;
 }
 
 

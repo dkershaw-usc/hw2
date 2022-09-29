@@ -14,7 +14,17 @@ void Book::dump(std::ostream& os) const
     os << this->isbn_ <<  "\n" << this->author_ << std::endl;
 }
 
-std::set<std::string> Book::keywords()
+bool Book::isMatch(std::vector<std::string>& searchTerms) const
+{
+    std::set<std::string> k = this->keywords();
+    for(int i = 0; i < (int) searchTerms.size(); i++)
+    { 
+        if(k.find(searchTerms[i]) != k.end()) return true;
+    }
+    return false;
+}
+
+std::set<std::string> Book::keywords() const
 {
     std::set<std::string> s_1 = parseStringToWords(this->name_);
     std::set<std::string> s_2 = parseStringToWords(this->author_);
@@ -23,7 +33,7 @@ std::set<std::string> Book::keywords()
     return s_3;
 }
 
-std::string Book::displayString()
+std::string Book::displayString() const
 {
     //The Kinda Alright Gatsby by Dresden Kershaw | $4.19 | In Stock: 1 | Book
     std::string out = "";
