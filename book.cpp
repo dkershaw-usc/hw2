@@ -7,6 +7,10 @@ Book::Book(const std::string category, const std::string name, double price, int
     this->author_ = author;
 }
 
+Book::~Book()
+{
+}
+
 void Book::dump(std::ostream& os) const
 {
     //write data from class into raw text stream

@@ -1,12 +1,12 @@
 #include "user.h"
 using namespace std;
 
-User::User() : name_("unknown"), balance_(0.0), type_(1)
+User::User() : name_("unknown"), balance_(0.0), type_(1), cart()
 {
 
 }
 User::User(std::string name, double balance, int type) :
-    name_(name), balance_(balance), type_(type)
+    name_(name), balance_(balance), type_(type), cart()
 {
 
 }
@@ -40,7 +40,7 @@ void User::dump(std::ostream& os)
 //My Code
 void User::checkout()
 {
-    for(int i = this->cart.getSize() - 1; i >= 0; i--)
+    //for(int i = this->cart.getSize() - 1; i >= 0; i--)
     {
         //CASE 0: Item is out of stock
         //CASE 1: Cannot afford item

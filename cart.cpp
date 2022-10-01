@@ -1,5 +1,13 @@
 #include "cart.h"
 
+Cart::Cart()
+{
+}
+
+Cart::~Cart()
+{
+}
+
 void Cart::add(Product* product)
 {
     this->products.push_back(product);

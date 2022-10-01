@@ -7,6 +7,10 @@ Movie::Movie(const std::string category, const std::string name, double price, i
     this->rating_ = rating;
 }
 
+Movie::~Movie()
+{
+}
+
 void Movie::dump(std::ostream& os) const
 {
     //write data from class into raw text stream
@@ -14,7 +18,7 @@ void Movie::dump(std::ostream& os) const
     os << this->genre_ << std::endl;
 }
 
-std::set<std::string> Movie::keywords()
+std::set<std::string> Movie::keywords() const
 {
     std::set<std::string> s_1 = parseStringToWords(this->name_);
     std::set<std::string> s_2 = parseStringToWords(this->genre_);
@@ -22,7 +26,17 @@ std::set<std::string> Movie::keywords()
     return s;
 }
 
-std::string Movie::displayString()
+bool Movie::isMatch(std::vector<std::string>& searchTerms) const
+{
+    std::set<std::string> k = this->keywords();
+    for(int i = 0; i < (int) searchTerms.size(); i++)
+    { 
+        if(k.find(searchTerms[i]) != k.end()) return true;
+    }
+    return false;
+}
+
+std::string Movie::displayString() const
 {
     //The Franchisers 7 | $49.99 | In Stock: 9 | Movie | Action | Rated: R
     std::string out = "";

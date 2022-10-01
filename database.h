@@ -13,7 +13,7 @@ class DataBase : public DataStore{
         void addUser(User* u);
 
         //edit items in database
-        void decrementStock(Product* p);
+        void decreaseStock(Product* p, int num);
 
         std::vector<Product*> search(std::vector<std::string>& terms, int type);
 

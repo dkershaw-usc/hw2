@@ -7,6 +7,10 @@ Clothing::Clothing(const std::string category, const std::string name, double pr
     this->brand_ = brand;
 }
 
+Clothing::~Clothing()
+{
+}
+
 void Clothing::dump(std::ostream& os) const
 {
     //write data from class into raw text stream
@@ -14,7 +18,7 @@ void Clothing::dump(std::ostream& os) const
     os << this->size_ << "\n" << this->brand_ << std::endl;
 }
 
-std::set<std::string> Clothing::keywords()
+std::set<std::string> Clothing::keywords() const
 {
     //parse the item name and brand into words
     std::set<std::string> s_1 = parseStringToWords(this->name_);
@@ -25,7 +29,17 @@ std::set<std::string> Clothing::keywords()
     return s_3;
 }
 
-std::string Clothing::displayString()
+bool Clothing::isMatch(std::vector<std::string>& searchTerms) const
+{
+    std::set<std::string> k = this->keywords();
+    for(int i = 0; i < (int) searchTerms.size(); i++)
+    { 
+        if(k.find(searchTerms[i]) != k.end()) return true;
+    }
+    return false;
+}
+
+std::string Clothing::displayString() const
 {
     //Men's Performance Scarf by Nike | $29.98 | In Stock: 2 | Clothing | Size: Medium 
     std::string out = "";
