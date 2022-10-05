@@ -90,4 +90,11 @@ void DataBase::dump(std::ostream& ofile)
     {
         (*it)->dump(ofile);
     }
+    ofile << "</products>" << "\n";
+    ofile << "<users>" << "\n";
+    for(std::set<User*>::iterator it = users.begin(); it != users.end(); it++)
+    {
+        (*it)->dump(ofile);
+    }
+    ofile << "</users>" << "\n";
 }

@@ -47,6 +47,7 @@ void User::checkout()
         if(this->cart.get(i)->getPrice() < this->balance_ && this->cart.get(i)->getQty() > 0)
         {
             this->balance_ -= this->cart.get(i)->getPrice();
+            this->cart.get(i)->subtractQty(1);
             this->cart.remove(i);
         }
         //CASE 2: Purchase unsuccessful, iterates to next product in cart

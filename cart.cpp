@@ -11,7 +11,6 @@ Cart::~Cart()
 void Cart::add(Product* product)
 {
     this->products.push_back(product);
-    std::cout << "Push successful." << std::endl;
 }
 
 void Cart::remove(int index)

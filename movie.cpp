@@ -19,6 +19,7 @@ void Movie::dump(std::ostream& os) const
     //write data from class into raw text stream
     Product::dump(os);
     os << this->genre_ << std::endl;
+    os << this->rating_ << std::endl;
 }
 
 std::set<std::string> Movie::keywords() const

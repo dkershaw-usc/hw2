@@ -153,7 +153,8 @@ int main(int argc, char* argv[])
 
                 for(int i = 0; i < (int) p.size(); i++)
                 {
-                    cout << i+1 << " : " << p[i]->getName() << " | " << p[i]->getPrice() << endl;
+                    // plus-one to account for zero-indexing 
+                    cout << i+1 << " : " << p[i]->getName() << " | $" << p[i]->getPrice() << endl;
                 }
             }
             else {
