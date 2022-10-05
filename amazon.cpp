@@ -134,6 +134,7 @@ int main(int argc, char* argv[])
                 //internal zero-indexing 
                 index--;
 
+                //check that the user exists
                 if(ds.getUser(username) == nullptr)
                 {
                     cout << "Invalid request" << endl;
