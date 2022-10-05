@@ -42,17 +42,12 @@ std::set<std::string> Book::keywords() const
 
 std::string Book::displayString() const
 {
-    //The Decent Gatsby by Dresden Kershaw | $4.19 | In Stock: 1 | Book
     std::stringstream outStream;
-    outStream << this->name_;
-    outStream << " by ";
-    outStream << this->author_;
-    outStream << " | $";
-    outStream << std::setprecision(4) << this->price_;
-    outStream << " | In Stock: ";
-    outStream << std::to_string(this->qty_);
-    outStream << " | ";
-    outStream << "Book";
+    outStream << this->name_ << std::endl;
+    outStream << "Author: " << author_ << " ";
+    outStream << "ISBN: " << this->isbn_ << std::endl;
+    outStream <<  "$" << std::setprecision(4) << this->price_ << " ";
+    outStream << std::to_string(this->qty_) << " left." << std::endl;;
     std::string out = outStream.str();
     return out;
 }

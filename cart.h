@@ -9,8 +9,8 @@ class Cart{
         void remove(int index);
         int getSize();
         Product* get(int index);
-        std::vector<Product*> getProducts();
+        std::vector<Product*>* getProducts();
         
     private:
-        std::vector<Product*> products;
+        std::vector<Product*>* products;
 };

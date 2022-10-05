@@ -42,17 +42,12 @@ bool Movie::isMatch(std::vector<std::string>& searchTerms) const
 
 std::string Movie::displayString() const
 {
-    //The Franchisers 7 | $49.99 | In Stock: 9 | Movie | Action | R
     std::stringstream outStream;
-    outStream << this->name_;
-    outStream << " | $";
-    outStream << std::setprecision(4) << this->price_;
-    outStream << " | In Stock: ";
-    outStream << std::to_string(this->qty_);
-    outStream << " | Movie | ";
-    outStream << this->genre_;
-    outStream << " | ";
-    outStream << this->rating_;
+    outStream << this->name_ << std::endl;
+    outStream << "Genre: " << genre_ << " ";
+    outStream << "Rating: " << this->rating_ << std::endl;
+    outStream <<  "$" << std::setprecision(4) << this->price_ << " ";
+    outStream << std::to_string(this->qty_) << " left." << std::endl;;
     std::string out = outStream.str();
     return out;
 }

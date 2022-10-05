@@ -150,12 +150,12 @@ int main(int argc, char* argv[])
                 string username;
                 ss >> username;
 
-                std::vector<Product*> p = ds.getUser(username)->getCart()->getProducts();
+                std::vector<Product*>* p = ds.getUser(username)->getCart()->getProducts();
 
-                for(int i = 0; i < (int) p.size(); i++)
+                for(int i = 0; i < (int) p->size(); i++)
                 {
                     // plus-one to account for zero-indexing 
-                    cout << i+1 << " : " << p[i]->getName() << " | $" << p[i]->getPrice() << endl;
+                    cout << i+1 << " : " << p->at(i)->getName() << " | $" << p->at(i)->getPrice() << endl;
                 }
             }
             else {

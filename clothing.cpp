@@ -44,17 +44,12 @@ bool Clothing::isMatch(std::vector<std::string>& searchTerms) const
 
 std::string Clothing::displayString() const
 {
-    //Men's Performance Scarf by Nike | $29.98 | In Stock: 2 | Clothing | Size: Medium 
     std::stringstream outStream;
-    outStream << this->name_;
-    outStream << " by ";
-    outStream << this->brand_;
-    outStream << "| $";
-    outStream << std::setprecision(4) << this->price_;
-    outStream << " | In Stock: ";
-    outStream << std::to_string(this->qty_);
-    outStream << " | ";
-    outStream << "Clothing";
+    outStream << this->name_ << std::endl;
+    outStream << "Size: " << size_ << " ";
+    outStream << "Brand: " << this->brand_ << std::endl;
+    outStream <<  "$" << std::setprecision(4) << this->price_ << " ";
+    outStream << std::to_string(this->qty_) << " left." << std::endl;;
     std::string out = outStream.str();
     return out;
 }

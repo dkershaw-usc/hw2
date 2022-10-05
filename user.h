@@ -30,6 +30,6 @@ private:
     int type_;
 
     //My Code
-    Cart cart;
+    Cart* cart;
 };
 #endif
