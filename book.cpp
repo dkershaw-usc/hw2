@@ -1,5 +1,8 @@
 #include "book.h"
 #include "util.h"
+#include <iostream>
+#include <iomanip>
+#include <sstream>
 
 Book::Book(const std::string category, const std::string name, double price, int qty, const std::string isbn, const std::string author) : Product::Product("book", name, price, qty)
 {
@@ -39,16 +42,17 @@ std::set<std::string> Book::keywords() const
 
 std::string Book::displayString() const
 {
-    //The Kinda Alright Gatsby by Dresden Kershaw | $4.19 | In Stock: 1 | Book
-    std::string out = "";
-    out += this->name_;
-    out += " by ";
-    out += this->author_;
-    out += "| $";
-    out += this->price_;
-    out += " | In Stock: ";
-    out += this->qty_;
-    out += " | ";
-    out += this->category_;
+    //The Decent Gatsby by Dresden Kershaw | $4.19 | In Stock: 1 | Book
+    std::stringstream outStream;
+    outStream << this->name_;
+    outStream << " by ";
+    outStream << this->author_;
+    outStream << " | $";
+    outStream << std::setprecision(4) << this->price_;
+    outStream << " | In Stock: ";
+    outStream << std::to_string(this->qty_);
+    outStream << " | ";
+    outStream << "Book";
+    std::string out = outStream.str();
     return out;
 }

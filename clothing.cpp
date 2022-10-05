@@ -1,5 +1,8 @@
 #include "clothing.h"
 #include "util.h"
+#include <iostream>
+#include <iomanip>
+#include <sstream>
 
 Clothing::Clothing(const std::string category, const std::string name, double price, int qty, const std::string size, const std::string brand) : Product::Product("clothing", name, price, qty)
 {
@@ -42,17 +45,16 @@ bool Clothing::isMatch(std::vector<std::string>& searchTerms) const
 std::string Clothing::displayString() const
 {
     //Men's Performance Scarf by Nike | $29.98 | In Stock: 2 | Clothing | Size: Medium 
-    std::string out = "";
-    out += this->name_;
-    out += " by ";
-    out += this->brand_;
-    out += "| $";
-    out += this->price_;
-    out += " | In Stock: ";
-    out += this->qty_;
-    out += " | ";
-    out += this->category_;
-    out += " | Size: ";
-    out += this->size_;
+    std::stringstream outStream;
+    outStream << this->name_;
+    outStream << " by ";
+    outStream << this->brand_;
+    outStream << "| $";
+    outStream << std::setprecision(4) << this->price_;
+    outStream << " | In Stock: ";
+    outStream << std::to_string(this->qty_);
+    outStream << " | ";
+    outStream << "Clothing";
+    std::string out = outStream.str();
     return out;
 }

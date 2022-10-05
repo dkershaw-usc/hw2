@@ -5,6 +5,7 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+#include <cctype>
 #include "product.h"
 #include "db_parser.h"
 #include "product_parser.h"
@@ -100,10 +101,61 @@ int main(int argc, char* argv[])
                 done = true;
             }
 	    /* Add support for other commands here */
+            else if ( cmd == "ADD" )
+            {
+                string username;
+                int index;
+                
+                ss >> username;
+                ss >> index;
 
+                //internal zero-indexing 
+                index--;
 
+                if(ds.getUser(username) == nullptr)
+                {
+                    cout << "Invalid request" << endl;
+                }
+                //check that the index is valid
+                else if(index < (int) hits.size() && index >= 0)
+                {
+                    User* u = ds.getUser(username);
+                    u->addToCart(hits[index]);
+                }
+            }
+            else if ( cmd == "BUYCART" )
+            {
+                string username;
+                int index;
+                
+                ss >> username;
+                ss >> index;
 
+                //internal zero-indexing 
+                index--;
 
+                if(ds.getUser(username) == nullptr)
+                {
+                    cout << "Invalid request" << endl;
+                }
+                else
+                {
+                    User* u = ds.getUser(username);
+                    u->checkout();
+                }
+            }
+            else if ( cmd == "VIEWCART" )
+            {
+                string username;
+                ss >> username;
+
+                std::vector<Product*> p = ds.getUser(username)->getCart()->getProducts();
+
+                for(int i = 0; i < (int) p.size(); i++)
+                {
+                    cout << i+1 << " : " << p[i]->getName() << " | " << p[i]->getPrice() << endl;
+                }
+            }
             else {
                 cout << "Unknown command" << endl;
             }

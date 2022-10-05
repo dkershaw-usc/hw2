@@ -12,7 +12,7 @@ DataBase::~DataBase()
 void DataBase::addProduct(Product* p)
 {
     //CASE 0: The product exists in the current DataBase
-    if(this->products.find(p) == this->products.end())
+    if(this->products.find(p) != this->products.end())
     {
         return;
     }
@@ -25,16 +25,19 @@ void DataBase::addProduct(Product* p)
 
 void DataBase::addUser(User* u)
 {
-    //CASE 0: The user exists in the current DataBase
-    if(this->users.find(u) == this->users.end())
+    users.insert(u);
+}
+
+User* DataBase::getUser(std::string username) const
+{
+    for(std::set<User*>::iterator it = this->users.begin(); it != this->users.end(); it++)
     {
-        return;
+        if((*it)->getName() == username)
+        {
+            return *it;
+        }
     }
-    //CASE 1: The user does not exist in the current DataBase
-    else
-    {
-        users.insert(u);
-    }
+    return nullptr;
 }
 
 void DataBase::decreaseStock(Product* p, int num)
@@ -45,7 +48,7 @@ void DataBase::decreaseStock(Product* p, int num)
 std::vector<Product*> DataBase::search(std::vector<std::string>& terms, int type)
 {
     std::vector<Product*> out;
-    
+
     for(std::set<Product*>::iterator it = this->products.begin(); it != this->products.end(); it++)
     {
         bool hasAllTerms = true;
@@ -53,8 +56,9 @@ std::vector<Product*> DataBase::search(std::vector<std::string>& terms, int type
         {
             for(int i = 0; i < (int) terms.size(); i++)
             {
+                std::set<std::string> k = (*it)->keywords();
                 //if any of the terms are not in the keywords of a product
-                if((*it)->keywords().find(terms[i]) == (*it)->keywords().end())
+                if(k.find(terms[i]) == k.end())
                 {
                     hasAllTerms = false;
                 }

@@ -1,5 +1,8 @@
 #include "movie.h"
 #include "util.h"
+#include <iostream>
+#include <iomanip>
+#include <sstream>
 
 Movie::Movie(const std::string category, const std::string name, double price, int qty, const std::string genre, const std::string rating) : Product::Product("movie", name, price, qty)
 {
@@ -38,18 +41,17 @@ bool Movie::isMatch(std::vector<std::string>& searchTerms) const
 
 std::string Movie::displayString() const
 {
-    //The Franchisers 7 | $49.99 | In Stock: 9 | Movie | Action | Rated: R
-    std::string out = "";
-    out += this->name_;
-    out += "| $";
-    out += this->price_;
-    out += " | In Stock: ";
-    out += this->qty_;
-    out += " | ";
-    out += this->category_;
-    out += " | ";
-    out += this->genre_;
-    out += " | Rated: ";
-    out += this->rating_;
+    //The Franchisers 7 | $49.99 | In Stock: 9 | Movie | Action | R
+    std::stringstream outStream;
+    outStream << this->name_;
+    outStream << " | $";
+    outStream << std::setprecision(4) << this->price_;
+    outStream << " | In Stock: ";
+    outStream << std::to_string(this->qty_);
+    outStream << " | Movie | ";
+    outStream << this->genre_;
+    outStream << " | ";
+    outStream << this->rating_;
+    std::string out = outStream.str();
     return out;
 }

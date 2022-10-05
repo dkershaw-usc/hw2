@@ -15,44 +15,30 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
-    std::set<std::string>* s = new std::set<std::string>;
+    std::set<std::string> s;
     std::string buf = "";
 
-    for(int i = 0; i < (int) rawWords.length(); i++)
+    for(int i = 0; i <= (int) rawWords.length(); i++)
     {
-        buf += rawWords[i];
-        bool needsCleared = false;
-
-        //CASE 0: string has no punctuation
-        if(rawWords[i] == ' ')
+        //CASE 0: string contains non-alphanumerics
+        // i.e. the current character is not a number or letter 
+        if (!std::isalnum(rawWords[i]))
         {
-            needsCleared = true;
-        }
-        //CASE 1: string contains punctuation
-        // the current character is not a number or letter 
-        //  (not alphanumeric)
-        else if (!std::isalnum(rawWords[i]))
-        {
-            needsCleared = true;
-        }
-
-        //clear the string buffer
-        if(needsCleared)
-        {
-            //the last index is either whitespace or 
-            // non-alphanumeric; thus, pop its last index
-            buf.pop_back();
             //if string is 2 or more, add to keywords
             if (buf.length() > 1)
             {
-                s->insert(convToLower(buf));
+                s.insert(convToLower(buf));
             }
             //either way, clear the buffer of the current word
             buf.clear();
         }
+        else
+        {
+            buf += rawWords[i];
+        }
     }
     
-    return * s;
+    return s;
 }
 
 /**************************************************

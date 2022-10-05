@@ -40,10 +40,25 @@ void User::dump(std::ostream& os)
 //My Code
 void User::checkout()
 {
-    //for(int i = this->cart.getSize() - 1; i >= 0; i--)
+    for(int i = this->cart.getSize() - 1; i >= 0; i--)
     {
-        //CASE 0: Item is out of stock
-        //CASE 1: Cannot afford item
-        //CASE 2: Purchase successful
+        //CASE 0: bad username. handled in amazon.cpp
+        //CASE 1: Item is in stock and can be afforded by the user
+        if(this->cart.get(i)->getPrice() < this->balance_ && this->cart.get(i)->getQty() > 0)
+        {
+            this->balance_ -= this->cart.get(i)->getPrice();
+            this->cart.remove(i);
+        }
+        //CASE 2: Purchase unsuccessful, iterates to next product in cart
     }
+}
+
+void User::addToCart(Product* p)
+{
+    this->cart.add(p);
+}
+
+Cart* User::getCart()
+{
+    return &this->cart;
 }

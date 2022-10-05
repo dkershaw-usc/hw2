@@ -11,6 +11,7 @@ class DataBase : public DataStore{
         //add items to database
         void addProduct(Product* p);
         void addUser(User* u);
+        User* getUser(std::string username) const;
 
         //edit items in database
         void decreaseStock(Product* p, int num);
@@ -19,7 +20,6 @@ class DataBase : public DataStore{
 
         void dump(std::ostream& ofile);
 
-    private:
         std::set<Product*> products;
         std::set<User*> users;
 };

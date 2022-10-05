@@ -21,6 +21,8 @@ public:
 
     //My Code
     void checkout();
+    void addToCart(Product* p);
+    Cart* getCart();
 
 private:
     std::string name_;
