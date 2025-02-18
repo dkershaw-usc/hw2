@@ -1,12 +1,26 @@
 #include "book.h"
+#include "product.h"
 #include "util.h"
+
+Book::Book(const std::string category, const std::string name, double price, int qty, std::string author, std::string isbn) :
+    Product(category, name, price, qty),
+    author_(author),
+    isbn_(isbn)
+{
+
+}
+
+Book::~Book()
+{
+
+}
 
 std::set<std::string> Book::keywords() const
 {
     std::set<std::string> out;
 
-    out.insert(isbn_);
-    out.insert(author_);
+    if(isbn_.length() > 1) out.insert(isbn_);
+    if(author_.length() > 1) out.insert(author_);
 
     std::set<std::string> nameWordSet = parseStringToWords(getName());
     // inserting a set into a set req's iterator params
@@ -36,4 +50,9 @@ void Book::dump(std::ostream& os) const
     os << qty_ << '\n';
     os << isbn_ << '\n';
     os << "Oops! This is a placeholder!\n";
+}
+
+bool Book::isMatch(std::vector<std::string>& searchTerms) const
+{
+    return false;
 }

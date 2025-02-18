@@ -22,7 +22,14 @@ product_parser.o: product_parser.cpp product_parser.h product.h
 	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c product_parser.cpp
 util.o: util.cpp util.h
 	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c util.cpp
-
+# New implementations
+my_ds.o: my_ds.cpp my_ds.h 
+	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c my_ds.cpp
+book.o: book.cpp book.h
+	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c book.cpp
+# Self tests
+selftest_book: selftest_book.cpp book.h
+	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c selftest_book.cpp
 
 clean:
 	rm -f *.o amazon

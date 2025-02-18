@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <set>
+#include <functional>
 
 
 /** Complete the setIntersection and setUnion functions below
@@ -13,26 +14,35 @@
 template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
-    std::set<T> insxResult;
+    // define new not to overwrte args
+    typename std::set<T> insxResult;
     // iterates over n elements of s1
-    for(std::set<T>::iterator it = s1.begin(); it != s1.end(); ++it)
+    for(typename std::set<T>::iterator it = s1.begin(); it != s1.end(); ++it)
     {
         // set::find runs O(logn), reference: https://cplusplus.com/reference/set/set/find/
-        std::set<T>::iterator found = s2.find(*it);
-        if(found != s1.end()) insxResult.insert(*found);
+        typename std::set<T>::iterator found = s2.find(*it);
+        if(found != s2.end()) 
+        {
+            insxResult.insert(*it);
+        }
+        else
+        {
+            insxResult.erase(*it);
+        }
     }
     return insxResult;
 }
 template <typename T>
 std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
-    std::set<T> unxResult = s1;
-    // iterates over n elements of s1
-    for(std::set<T>::iterator it = s1.begin(); it != s1.end(); ++it)
+    // don't overwrite args
+    typename std::set<T> unxResult = s1;
+    // iterates over n elements of s2
+    for(typename std::set<T>::iterator it = s2.begin(); it != s2.end(); ++it)
     {
         // set::find runs O(logn), reference: https://cplusplus.com/reference/set/set/find/
-        std::set<T>::iterator found = s2.find(*it);
-        if(found == s1.end()) unxResult.insert(*found);
+        typename std::set<T>::iterator found = s1.find(*it);
+        if(found == s1.end()) unxResult.insert(*it);
     }
     return unxResult;
 }

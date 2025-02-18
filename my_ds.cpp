@@ -29,6 +29,7 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
 {
     std::vector<Product*> out;
     std::set<Product*> gather;
+    std::set<Product*> andGather;
 
     switch (type)
     {
@@ -39,13 +40,18 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
         }
         break;
     case 0: // AND search
-        // TODO: recursive sol'n:
-        // - gather set of term matches from current level
-        // - remove elemens not in set intersection of this and next level
-        // - when reached base level, return end result
-
+        // TODO: investgate recursive sol'n
+        // Iteratively, for now:
+        // - Gather first set of products
+        // - Find intersection between this and all subsequent sets
+        gather = keywordProductMap[terms.front()];
+        for(std::vector<std::string>::iterator it = terms.begin(); it != terms.end(); ++it)
+        {
+            gather = setIntersection(gather, keywordProductMap[*(it)]);
+        }
         break;
     default:
+        std::cerr << "Unsupported search type. \n 0 - AND \n 1 - OR" << std::endl;
         break;
     }
 
@@ -58,7 +64,13 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
 
 void MyDataStore::dump(std::ostream& ofile)
 {
-
+    for(std::map<std::string,std::set<Product*>>::iterator it = keywordProductMap.begin(); it != keywordProductMap.end(); ++it)
+    {
+        for(std::set<Product*>::iterator jit = keywordProductMap[it->first].begin(); jit != keywordProductMap[it->first].end(); ++jit)
+        {
+            (**jit).dump(ofile);
+        }
+    }
 }
 
 // std::map<std::string,std::set<Product*>> keywordProductMap;

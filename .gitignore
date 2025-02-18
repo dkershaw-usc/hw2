@@ -3,3 +3,4 @@ amazon
 hw2_tests/
 todo.md
 selftest*
+*selftest.cpp

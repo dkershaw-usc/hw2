@@ -1,9 +1,15 @@
-#include "datastore.h"
-#include "util.h"
 #include <map>
 #include <queue>
 
-class MyDataStore : DataStore
+#include "datastore.h"
+#include "util.h"
+
+// "product.h" provided by "datastore.h"
+#include "book.h"
+#include "clothing.h"
+#include "movie.h"
+
+class MyDataStore : public DataStore
 {
     public:
         void addProduct(Product *p);
