@@ -47,6 +47,8 @@ std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
     return unxResult;
 }
 
+std::string doubleToCashString(double d);
+
 /***********************************************/
 /* Prototypes of functions defined in util.cpp */
 /***********************************************/

@@ -101,10 +101,34 @@ int main(int argc, char* argv[])
                 done = true;
             }
 	    /* Add support for other commands here */
+            else if(cmd == "ADD")
+            {
+                string username;
+                if(ss >> username)
+                {
+                    size_t idx;
+                    if(ss >> idx)
+                    {
+                        idx -= 1;
+                        if(idx < hits.size())
+                        {
+                            ds.addToCart(username,hits[idx]);
+                        }   
+                    }
+                }
 
+            }
+            else if(cmd == "VIEWCART")
+            {
+                string username;
+                if(ss >> username) {
+                    ds.viewCart(username);
+                }
+            }
+            else if(cmd == "BUYCART")
+            {
 
-
-
+            }
             else {
                 cout << "Unknown command" << endl;
             }

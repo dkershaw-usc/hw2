@@ -7,7 +7,6 @@ Book::Book(const std::string category, const std::string name, double price, int
     author_(author),
     isbn_(isbn)
 {
-
 }
 
 Book::~Book()
@@ -19,8 +18,8 @@ std::set<std::string> Book::keywords() const
 {
     std::set<std::string> out;
 
-    if(isbn_.length() > 1) out.insert(isbn_);
-    if(author_.length() > 1) out.insert(author_);
+    if(isbn_.length() > 1) out.insert(convToLower(isbn_));
+    if(author_.length() > 1) out.insert(convToLower(author_));
 
     std::set<std::string> nameWordSet = parseStringToWords(getName());
     // inserting a set into a set req's iterator params
@@ -35,9 +34,9 @@ std::string Book::displayString() const
 
     s += name_ + '\n';
     s += "Author: " + author_ + " ISBN: " + isbn_ + '\n';
-    std::string p = std::to_string(price_);
+    std::string p = doubleToCashString(price_);
     std::string q = std::to_string(qty_);
-    s += p + ' ' + q + " left." + '\n';
+    s += p + ' ' + q + " left.";
 
     return s;
 }
@@ -49,7 +48,6 @@ void Book::dump(std::ostream& os) const
     os << price_ << '\n';
     os << qty_ << '\n';
     os << isbn_ << '\n';
-    os << "Oops! This is a placeholder!\n";
 }
 
 bool Book::isMatch(std::vector<std::string>& searchTerms) const

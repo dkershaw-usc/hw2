@@ -15,7 +15,7 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
-    rawWords = trim(rawWords);
+    rawWords = convToLower(trim(rawWords));
     
     std::set<std::string> parsedOutput;
     size_t substrBegin = 0;
@@ -49,6 +49,30 @@ std::set<std::string> parseStringToWords(string rawWords)
         }
     }
     return parsedOutput;
+}
+
+std::string doubleToCashString(double d)
+{
+    std::string p = std::to_string(d);
+    int signifFigs = 0;
+    bool decFlag = false;
+    for(std::string::iterator it = p.begin(); it != p.end(); ++it)
+    {
+        if(decFlag)
+        {
+            signifFigs++;
+        } 
+        if(*it == '.') 
+        {
+            decFlag = true;
+        }
+    }
+    while(signifFigs > 2)
+    {
+        p.pop_back();
+        signifFigs--;
+    }
+    return p;
 }
 
 /**************************************************

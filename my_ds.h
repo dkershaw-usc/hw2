@@ -16,7 +16,14 @@ class MyDataStore : public DataStore
         void addUser(User *u);
         std::vector<Product*> search(std::vector<std::string>& terms, int type);
         void dump(std::ostream& ofile);
+        std::set<Product*>& getProductsForKeyword(std::string term);
+        void addToCart(std::string username, Product*);
+        void viewCart(std::string username);
+        // Must preserve order added to cart. FIFO.
+        void buyCart(std::string username);
+        void tryBuy(User* u,Product* p);
+        User* findUserByName(std::string);
     protected:
         std::map<std::string,std::set<Product*>> keywordProductMap;
-        std::map<User*,std::queue<Product*>> userCartMap;
+        std::map<User*,std::vector<Product*>> userCartMap;
 };
