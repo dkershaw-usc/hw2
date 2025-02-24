@@ -202,6 +202,7 @@ void MyDataStore::tryBuy(User* u, Product* p)
             // Buy it.
             p->subtractQty(1);
             u->deductAmount(p->getPrice());
+            userCartMap[u].pop_back();
         }
     }
     else

@@ -32,7 +32,7 @@ std::string Clothing::displayString() const
     s += "Size: " + size_ + " Brand: " + brand_ + '\n';
     std::string p = doubleToCashString(price_);
     std::string q = std::to_string(qty_);
-    s += p + ' ' + q + " left." + '\n';
+    s += p + ' ' + q + " left.";
 
     return s;
 }

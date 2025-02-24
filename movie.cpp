@@ -31,7 +31,7 @@ std::string Movie::displayString() const
     s += "Genre: " + genre_ + " Rating: " + rating_ + '\n';
     std::string p = doubleToCashString(price_);
     std::string q = std::to_string(qty_);
-    s += p + ' ' + q + " left." + '\n';
+    s += p + ' ' + q + " left.";
 
     return s;
 }
