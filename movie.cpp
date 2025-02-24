@@ -3,8 +3,9 @@
 
 Movie::Movie(const std::string category, const std::string name, double price, int qty, std::string genre, std::string rating) :
     Product(category, name, price, qty),
-    genre_(genre),
-    rating_(rating)
+    rating_(rating),
+    genre_(genre)
+    
 {
 }
 

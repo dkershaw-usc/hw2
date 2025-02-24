@@ -9,6 +9,6 @@ class Movie : public Product
         void dump(std::ostream& os) const;
     protected:
         // extras not in Product
-        std::string genre_;
         std::string rating_;
+        std::string genre_;
 };
