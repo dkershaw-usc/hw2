@@ -162,14 +162,14 @@ void MyDataStore::viewCart(std::string u)
     }
 
     int idx = 1;
-    std::vector<Product*> prods = userCartMap[user];
-    for(std::vector<Product*>::iterator it = prods.begin(); 
-                                        it != prods.end(); 
+    // std::vector<Product*> prods = userCartMap[user];
+    for(std::vector<Product*>::iterator it = userCartMap[user].begin(); 
+                                        it != userCartMap[user].end(); 
                                         ++it)
     {
         std::cout << "Item " << idx << std::endl;
         idx++;
-        (**it).dump(std::cout);
+        std::cout << (**it).displayString();
     }
 }
 
