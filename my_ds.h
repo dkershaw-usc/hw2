@@ -22,7 +22,7 @@ class MyDataStore : public DataStore
         void viewCart(std::string username);
         // Must preserve order added to cart. FIFO.
         void buyCart(std::string username);
-        void tryBuy(User* u,Product* p);
+        bool tryBuy(User* u,Product* p);
         User* findUserByName(std::string);
     protected:
         std::map<std::string,std::set<Product*>> keywordProductMap;

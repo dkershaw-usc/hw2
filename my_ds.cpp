@@ -187,11 +187,16 @@ void MyDataStore::buyCart(std::string u)
                                         it != prods.end(); 
                                         ++it)
     {
-        tryBuy(user,(*it));
+        if(tryBuy(user,(*it)))
+        {
+            userCartMap[user].pop_back();
+        }
     }
+    
 }
 
-void MyDataStore::tryBuy(User* u, Product* p)
+
+bool MyDataStore::tryBuy(User* u, Product* p)
 {
     // If the user has enough money:
     if(u->getBalance() >= p->getPrice())
@@ -202,13 +207,11 @@ void MyDataStore::tryBuy(User* u, Product* p)
             // Buy it.
             p->subtractQty(1);
             u->deductAmount(p->getPrice());
-            userCartMap[u].pop_back();
+            return true;
         }
     }
-    else
-    {
-        // Don't buy it. Move on.
-    }
+    // Don't buy it. Move on.
+    return false;
 }
 
 User* MyDataStore::findUserByName(std::string u)
