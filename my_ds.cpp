@@ -145,7 +145,7 @@ void MyDataStore::addToCart(std::string u, Product* p)
     User* user = findUserByName(u);
     if(user == nullptr)
     {
-        std::cout << "Invalid username" << std::endl;
+        std::cout << "Invalid request" << std::endl;
         return;
     }
 
