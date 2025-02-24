@@ -4,9 +4,8 @@ CXXFLAGS=-g -Wall -std=c++11
 #DEFS=-DDEBUG
 
 OBJS=amazon.o user.o db_parser.o product.o product_parser.o util.o my_ds.o book.o clothing.o movie.o
-SELF_OBJS=amazon
 
-all: amazon selftest_my_ds
+all: amazon
 
 amazon: $(OBJS)
 	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ $(OBJS)
@@ -32,12 +31,6 @@ clothing.o: clothing.cpp clothing.h
 	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c clothing.cpp
 movie.o: movie.cpp movie.h
 	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c movie.cpp
-# Self tests
-selftest: $(SELF_OBJS)
-	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ $(SELF_OBJS)
-selftest_book.o: selftest_book.cpp book.h
-	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c selftest_book.cpp
-selftest_my_ds: selftest_my_ds.cpp my_ds.h datastore.h
-	$(CXX) $(CXXFLAGS) $(DEFS) -o $@ -c selftest_my_ds.cpp $(OBJS)
+
 clean:
 	rm -f *.o amazon
