@@ -169,7 +169,7 @@ void MyDataStore::viewCart(std::string u)
     {
         std::cout << "Item " << idx << std::endl;
         idx++;
-        std::cout << (**it).displayString();
+        std::cout << (**it).displayString() << "\n\n";
     }
 }
 
