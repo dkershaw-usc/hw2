@@ -44,6 +44,7 @@ void Book::dump(std::ostream& os) const
     os << price_ << '\n';
     os << qty_ << '\n';
     os << isbn_ << '\n';
+    os << author_ << '\n';
 }
 
 bool Book::isMatch(std::vector<std::string>& searchTerms) const
