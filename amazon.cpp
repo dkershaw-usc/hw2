@@ -111,8 +111,17 @@ int main(int argc, char* argv[])
                         if(idx < hits.size())
                         {
                             ds.addToCart(username,hits[idx]);
-                        }   
+                        }
+                        else{ 
+                            cout << "Invalid request\n";
+                        }
                     }
+                    else{
+                        cout << "Invalid request\n";
+                    } 
+                }
+                else {
+                    cout << "Invalid request\n";
                 }
 
             }
