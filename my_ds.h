@@ -12,6 +12,7 @@
 class MyDataStore : public DataStore
 {
     public:
+        ~MyDataStore();
         void addProduct(Product *p);
         void addUser(User *u);
         std::vector<Product*> search(std::vector<std::string>& terms, int type);
@@ -26,4 +27,7 @@ class MyDataStore : public DataStore
     protected:
         std::map<std::string,std::set<Product*>> keywordProductMap;
         std::map<User*,std::vector<Product*>> userCartMap;
+    private:
+        std::set<Product*> products;
+        std::set<User*> users;
 };

@@ -9,15 +9,12 @@ Clothing::Clothing(const std::string category, const std::string name, double pr
 {
 }
 
-Clothing::~Clothing()
-{
-}
-
 std::set<std::string> Clothing::keywords() const
 {
     std::set<std::string> out;
 
-    out.insert(convToLower(brand_));
+    std::set<std::string> brandWords = parseStringToWords(brand_);
+    out.insert(brandWords.begin(), brandWords.end());
     out.insert(convToLower(size_));
 
     std::set<std::string> nameWordSet = parseStringToWords(getName());

@@ -2,6 +2,40 @@
 #include "datastore.h"
 #include <set>
 
+MyDataStore::~MyDataStore()
+{
+    // Delete Product objects
+    for(std::map<std::string,std::set<Product*>>::iterator it  = keywordProductMap.begin(); 
+                                                           it != keywordProductMap.end(); 
+                                                           ++it)
+    {
+        if(!it->second.empty()) it->second.clear();
+    }
+    keywordProductMap.clear();
+    for(std::set<Product*>::iterator it = products.begin();
+                                     it != products.end();
+                                    ++it)
+    {
+        delete *it;
+    }
+    // Delete User objects
+    for(std::map<User*,std::vector<Product*>>::iterator it  = userCartMap.begin(); 
+                                                     it != userCartMap.end(); 
+                                                     ++it)
+    {
+        for(std::vector<Product*>::iterator jit = userCartMap[it->first].begin(); 
+                                         jit != userCartMap[it->first].end(); 
+                                         ++jit)
+        {
+            delete (*jit);
+        }
+        it->second.clear();
+        delete (it)->first;
+    }
+    userCartMap.clear();
+    users.clear();
+}
+
 void MyDataStore::addProduct(Product* p)
 {
     if(p == nullptr) return;
@@ -23,12 +57,15 @@ void MyDataStore::addProduct(Product* p)
             keywordProductMap.insert(std::pair<std::string,std::set<Product*>>((*it),s));
         }
     }
+
+    products.insert(p);
 }
 
 void MyDataStore::addUser(User* u)
 {
     std::vector<Product*> cart;
     userCartMap.insert(std::pair<User*,std::vector<Product*>>(u,cart));
+    users.insert(u);
 }
 
 std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int type)
@@ -36,25 +73,14 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
     std::vector<Product*> out;
     std::set<Product*> gather = {};
 
-    for(std::set<Product*>::iterator it = this->getProductsForKeyword(terms[0]).begin();
-                                     it != this->getProductsForKeyword(terms[0]).end();
-                                     ++it)
-    {
-        std::cout << (*it)->getName() << std::endl;
-    }
-    
-    std::cout << "Searching..." << std::endl;
-
     if(type == 1) 
     {// OR search
         for(std::vector<std::string>::iterator it = terms.begin(); 
                                                it != terms.end(); 
                                                ++it)
         {
-            std::cout << "Searching for: " + *it + "...\n";
             if(this->keywordProductMap.find(*it) != this->keywordProductMap.end())
             {
-                std::cout << *it << std::endl;
                 gather = setUnion(gather,(this->keywordProductMap[(*it)]));
             }
         }
@@ -66,11 +92,9 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
         // - Gather first set of products
         // - Find intersection between this and all subsequent sets
         gather = getProductsForKeyword(terms[0]);
-        std::cout << terms[0] << ' ' << gather.size() << std::endl;
         for(std::vector<std::string>::iterator it = terms.begin(); it != terms.end(); ++it)
         {
             gather = setIntersection(gather, getProductsForKeyword(*it));
-            std::cout << gather.size() << std::endl;
         }
     }
     else
@@ -143,11 +167,14 @@ void MyDataStore::viewCart(std::string u)
         return;
     }
 
+    int idx = 1;
     std::vector<Product*> prods = userCartMap[user];
     for(std::vector<Product*>::iterator it = prods.begin(); 
                                         it != prods.end(); 
                                         ++it)
     {
+        std::cout << "Item " << idx << std::endl;
+        idx++;
         (**it).dump(std::cout);
     }
 }

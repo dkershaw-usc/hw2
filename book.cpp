@@ -9,17 +9,13 @@ Book::Book(const std::string category, const std::string name, double price, int
 {
 }
 
-Book::~Book()
-{
-
-}
-
 std::set<std::string> Book::keywords() const
 {
     std::set<std::string> out;
 
-    if(isbn_.length() > 1) out.insert(convToLower(isbn_));
-    if(author_.length() > 1) out.insert(convToLower(author_));
+    out.insert(convToLower(isbn_));
+    std::set<std::string> authorWords = parseStringToWords(author_);
+    out.insert(authorWords.begin(), authorWords.end());
 
     std::set<std::string> nameWordSet = parseStringToWords(getName());
     // inserting a set into a set req's iterator params
