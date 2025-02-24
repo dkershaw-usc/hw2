@@ -23,12 +23,6 @@ MyDataStore::~MyDataStore()
                                                      it != userCartMap.end(); 
                                                      ++it)
     {
-        for(std::vector<Product*>::iterator jit = userCartMap[it->first].begin(); 
-                                         jit != userCartMap[it->first].end(); 
-                                         ++jit)
-        {
-            delete (*jit);
-        }
         it->second.clear();
         delete (it)->first;
     }
